@@ -1,9 +1,74 @@
 ﻿@{
     ViewData["Title"] = "Inicio";
 }
+<!-- Eslogan -->
+<section class="hero">
+    <h2>BOLSOS DE TELA DE EDICIÓN LIMITADA</h2>
+    <h2>HECHOS A MANO UNO A UNO CON MIMO Y DETALLE</h2>
+</section>
 
-<div class="container">
-    <h1>Bienvenido a nuestra tienda de bolsos</h1>
-    <p>Encuentra los mejores bolsos para cada ocasión.</p>
-    <a href="@Url.Action("Index", "Producto")" class="btn btn-primary">Ver Productos</a>
-</div>
+<!-- Slider Section -->
+<section id="slider" class="slider">
+    <div class="slider-container">
+        <div class="slide active">
+            <img src="~/Images/Lota_Bombonera_Etnica.jpeg" alt="Adjetivo 1">
+            <p class="adjetivo">Elegancia</p>
+        </div>
+        <div class="slide">
+            <img src="~/Images/Lota_Playa.jpeg" alt="Adjetivo 2">
+            <p class="adjetivo">Sencillez</p>
+        </div>
+        <div class="slide">
+            <img src="~/Images/Lota_Sobre.jpeg" alt="Adjetivo 3">
+            <p class="adjetivo">Amistad</p>
+        </div>
+        <div class="slide">
+            <img src="~/Images/Mini_Lota_Fiesta.jpeg" alt="Adjetivo 4">
+            <p class="adjetivo">Comodidad</p>
+        </div>
+        <div class="slide">
+            <img src="~/Images/Tote_Lota.jpeg" alt="Adjetivo 5">
+            <p class="adjetivo">Artesanía</p>
+        </div>
+    </div>
+    <button class="prev" onclick="moveSlide(-1)">&#10094;</button>
+    <button class="next" onclick="moveSlide(1)">&#10095;</button>
+</section>
+
+<!-- Productos -->
+<section id="imagenes" class="imagenes">
+    <div class="imagenes-container">
+        <div class="imagen-item">
+            <img src="~/Images/Prueba.png" alt="Mini Lota Fiesta">
+            <p class="texto-imagen">Mini Lota Fiesta</p>
+        </div>
+        <div class="imagen-item">
+            <img src="~/Images/Prueba.png" alt="Imagen 2">
+            <p class="texto-imagen">Mini Lota Fiesta</p>
+        </div>
+        <div class="imagen-item">
+            <img src="~/Images/Prueba.png" alt="Imagen 3">
+            <p class="texto-imagen">Lota Escocés</p>
+        </div>
+        <div class="imagen-item">
+            <img src="~/Images/Prueba.png" alt="Imagen 4">
+            <p class="texto-imagen">Lota Sobre</p>
+        </div>
+        <div class="imagen-item">
+            <img src="~/Images/Prueba.png" alt="Imagen 5">
+            <p class="texto-imagen">Lota étnico</p>
+        </div>
+        <div class="imagen-item">
+            <img src="~/Images/Prueba.png" alt="Imagen 6">
+            <p class="texto-imagen">Lota Shopper</p>
+        </div>
+        <div class="imagen-item">
+            <img src="~/Images/Prueba.png" alt="Imagen 7">
+            <p class="texto-imagen">Tote Lota</p>
+        </div>
+    </div>
+</section>
+
+
+
+
