@@ -23,8 +23,26 @@ namespace WebApplication.Controllers
 
         public IActionResult Details(int id)
         {
-            var producto = _context.Productos
-                .FirstOrDefault(p => p.Id == id);
+            // Datos ficticios
+            var productos = new List<Producto>
+        {
+            new Producto { Id = 1, Nombre = "Mini Lota Mostaza", Precio = 49.99M, ImagenUrl = "Prueba.png", Descripcion = "Bolso práctico y elegante."  },
+            new Producto { Id = 2, Nombre = "Mini Lota Azul", Precio = 59.99M, ImagenUrl = "Prueba.png", Descripcion = "Bolso azul con estilo clásico." },
+            new Producto { Id = 3, Nombre = "Lota Escocés Azul", Precio = 69.99M, ImagenUrl = "Prueba.png", Descripcion = "Bolso con diseño escocés en tonos azules." },
+            new Producto { Id = 4, Nombre = "Lota Escocés Verde", Precio = 79.99M, ImagenUrl = "Prueba.png" },
+
+            new Producto { Id = 5, Nombre = "Mini Lota Mostaza", Precio = 49.99M, ImagenUrl = "Prueba.png", Descripcion = "Bolso práctico y elegante."  },
+            new Producto { Id = 6, Nombre = "Mini Lota Azul", Precio = 59.99M, ImagenUrl = "Prueba.png", Descripcion = "Bolso azul con estilo clásico." },
+            new Producto { Id = 7, Nombre = "Lota Escocés Azul", Precio = 69.99M, ImagenUrl = "Prueba.png", Descripcion = "Bolso con diseño escocés en tonos azules." },
+            new Producto { Id = 8, Nombre = "Lota Escocés Verde", Precio = 79.99M, ImagenUrl = "Prueba.png", Descripcion = "Bolso escocés en tonos verdes." },
+
+            new Producto { Id = 9, Nombre = "Mini Lota Mostaza", Precio = 49.99M, ImagenUrl = "Prueba.png", Descripcion = "Bolso práctico y elegante."  },
+            new Producto { Id = 10, Nombre = "Mini Lota Azul", Precio = 59.99M, ImagenUrl = "Prueba.png", Descripcion = "Bolso azul con estilo clásico." },
+            new Producto { Id = 11, Nombre = "Lota Escocés Azul", Precio = 69.99M, ImagenUrl = "Prueba.png", Descripcion = "Bolso con diseño escocés en tonos azules." },
+            new Producto { Id = 12, Nombre = "Lota Escocés Verde", Precio = 79.99M, ImagenUrl = "Prueba.png", Descripcion = "Bolso escocés en tonos verdes." },
+        };
+
+            var producto = productos.FirstOrDefault(p => p.Id == id);
 
             if (producto == null)
             {
@@ -32,7 +50,8 @@ namespace WebApplication.Controllers
             }
 
             return View(producto);
-        }
+        
+    }
 
         public IActionResult Create()
         {
