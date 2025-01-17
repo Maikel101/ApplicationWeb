@@ -1,0 +1,16 @@
+﻿
+@{
+    ViewData["Title"] = "Éxito";
+}
+
+<h2>@ViewData["Title"]</h2>
+
+@if (TempData["Message"] != null)
+{
+    <script>
+       window.addEventListener('load', function() {
+            var message = '@TempData["Message"]';
+            showNotification(message);
+        });
+    </script>
+}

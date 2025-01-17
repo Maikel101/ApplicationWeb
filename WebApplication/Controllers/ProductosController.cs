@@ -6,11 +6,11 @@ using WebApplication.Models;
 
 namespace WebApplication.Controllers
 {
-    public class ProductoController : Controller
+    public class ProductosController : Controller
     {
         private readonly AppDbContext _context;
 
-        public ProductoController(AppDbContext context)
+        public ProductosController(AppDbContext context)
         {
             _context = context;
         }
