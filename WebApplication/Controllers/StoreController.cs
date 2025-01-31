@@ -1,33 +1,22 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using WebApplication.Data;
 using WebApplication.Models;
 
 namespace WebApplication.Controllers
 {
     public class StoreController : Controller
     {
-        // GET: StoreController
+
+        private readonly AppDbContext _context;
+
+        public StoreController(AppDbContext context)
+        {
+            _context = context;
+        }
         public IActionResult Store()
         {
-            var productos = new List<Producto>
-    {
-        new Producto { Id = 1, Nombre = "Mini Lota Mostaza", Precio = 49.99M, ImagenUrl = "Prueba.png" },
-        new Producto { Id = 2, Nombre = "Mini Lota Azul", Precio = 59.99M, ImagenUrl = "Prueba.png" },
-        new Producto { Id = 3, Nombre = "Lota Escocés Azul", Precio = 69.99M, ImagenUrl = "Prueba.png" },
-        new Producto { Id = 4, Nombre = "Lota Escocés Verde", Precio = 79.99M, ImagenUrl = "Prueba.png" },
-
-         new Producto { Id = 5, Nombre = "Mini Lota Mostaza", Precio = 49.99M, ImagenUrl = "Prueba.png" },
-            new Producto { Id = 6, Nombre = "Mini Lota Azul", Precio = 59.99M, ImagenUrl = "Prueba.png" },
-            new Producto { Id = 7, Nombre = "Lota Escocés Azul", Precio = 69.99M, ImagenUrl = "Prueba.png" },
-            new Producto { Id = 8, Nombre = "Lota Escocés Verde", Precio = 79.99M, ImagenUrl = "Prueba.png" },
-
-            new Producto { Id = 9, Nombre = "Mini Lota Mostaza", Precio = 49.99M, ImagenUrl = "Prueba.png" },
-            new Producto { Id = 10, Nombre = "Mini Lota Azul", Precio = 59.99M, ImagenUrl = "Prueba.png" },
-            new Producto { Id = 11, Nombre = "Lota Escocés Azul", Precio = 69.99M, ImagenUrl = "Prueba.png" },
-            new Producto { Id = 12, Nombre = "Lota Escocés Verde", Precio = 79.99M, ImagenUrl = "Prueba.png" },
-        // Agrega más productos si es necesario
-    };
-
+            var productos = _context.Productos.ToList();
             return View(productos);
 
             

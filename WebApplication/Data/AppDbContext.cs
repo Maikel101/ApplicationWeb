@@ -12,8 +12,8 @@ namespace WebApplication.Data
         public DbSet<Categoria> Categorias { get; set; }
         public DbSet<Pedido> Pedidos { get; set; }
         public DbSet<DetallePedido> DetallePedidos { get; set; }
-
         public DbSet<Cliente> Clientes { get; set; }
+        public DbSet<Carrito> Carritos { get; set; }
 
     }
 }
