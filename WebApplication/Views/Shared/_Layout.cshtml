@@ -22,12 +22,27 @@
                 <li><a asp-area="" asp-controller="Clientes" asp-action="Create">Contacto</a></li>
             </ul>
         </nav>
+
         <div class="social-icons">
-            <a href="https://www.instagram.com/bolsoslota/"><img src="~/Images/Ig.png" alt="Instagram"></a>
-            <a href="mailto:bolsoslota@gmail.com"><img src="~/Images/Mail.png" alt="Email"></a>
-            <a href="tel:+660 877 083"><img src="~/Images/Whatssup.png" alt="WhatsApp"></a>
+            <a href="https://www.instagram.com/bolsoslota/">
+                <img src="~/Images/Ig.png" alt="Instagram">
+            </a>
+          @*   <a href="mailto:bolsoslota@gmail.com">
+                <img src="~/Images/Mail.png" alt="Email">
+            </a> *@
+            <a href="tel:+660877083">
+                <img src="~/Images/Whatssup.png" alt="WhatsApp">
+            </a>
+            <a asp-controller="Carrito" asp-action="Index" class="carrito">
+                <img src="~/Images/cesta.png" alt="Carrito" class="carrito">
+                <span id="carrito-count" class="badge bg-danger">0</span>
+            </a>
+            @* <a asp-area="" asp-controller="Carrito" asp-action="Index">
+                <img src="~/Images/cesta.png" alt="Carrito" class="carrito">
+            </a> *@
         </div>
-       
+
+     
     </header>
 
     <!-- Main Content -->

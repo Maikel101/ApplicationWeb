@@ -4,6 +4,7 @@ using Microsoft.EntityFrameworkCore;
 using WebApplication.Data;
 using WebApplication.Models;
 using System.Linq;
+using Newtonsoft.Json;
 
 namespace WebApplication.Controllers
 {
@@ -28,12 +29,17 @@ namespace WebApplication.Controllers
 
             return View(carritoItems);
         }
+        //public IActionResult Index()
+        //{
+        //    var carrito = HttpContext.Session.GetObjectFromJson<List<CarritoItem>>("Carrito");
+        //    return View(carrito ?? new List<CarritoItem>());
+        //}
 
-        // Acción para agregar un producto al carrito
         [HttpPost]
         public IActionResult Agregar(int productoId, int cantidad)
         {
-            string sessionId = GetSessionId();
+            string sessionId = GetSessionId();  // Aquí obtenemos el SessionId.
+
             var producto = _context.Productos.Find(productoId);
 
             if (producto == null)
@@ -41,7 +47,8 @@ namespace WebApplication.Controllers
                 return NotFound();
             }
 
-            var usuarioId = User.Identity.IsAuthenticated ? User.Identity.Name : null;
+            // Determina si el usuario está autenticado y se usa el SessionId o UsuarioId.
+            var usuarioId = User.Identity.IsAuthenticated ? User.Identity.Name : sessionId;  // Si el usuario está logueado, usar su Id.
 
             var carritoItem = _context.Carritos
                 .FirstOrDefault(c => c.ProductoId == productoId && c.SessionId == sessionId);
@@ -67,8 +74,53 @@ namespace WebApplication.Controllers
             }
 
             _context.SaveChanges();
-            return RedirectToAction("Index", "Carrito");
+
+            // Si quieres actualizar el carrito sin recargar la página, puedes hacer algo como esto:
+            int count = _context.Carritos.Where(c => c.SessionId == sessionId).Sum(c => c.Cantidad);
+            return Json(new { success = true, carritoCount = count });
         }
+
+
+        // Acción para agregar un producto al carrito
+        //[HttpPost]
+        //public IActionResult Agregar(int productoId, int cantidad)
+        //{
+        //    string sessionId = GetSessionId();
+        //    var producto = _context.Productos.Find(productoId);
+
+        //    if (producto == null)
+        //    {
+        //        return NotFound();
+        //    }
+
+        //    var usuarioId = User.Identity.IsAuthenticated ? User.Identity.Name : null;
+
+        //    var carritoItem = _context.Carritos
+        //        .FirstOrDefault(c => c.ProductoId == productoId && c.SessionId == sessionId);
+
+        //    if (carritoItem != null)
+        //    {
+        //        // Si el producto ya está en el carrito, actualiza la cantidad
+        //        carritoItem.Cantidad += cantidad;
+        //    }
+        //    else
+        //    {
+        //        // Si el producto no está en el carrito, agrégalo
+        //        carritoItem = new Carrito
+        //        {
+        //            ProductoId = producto.Id,
+        //            Producto = producto,
+        //            SessionId = sessionId,
+        //            Cantidad = cantidad,
+        //            PrecioUnitario = producto.Precio
+        //        };
+
+        //        _context.Carritos.Add(carritoItem);
+        //    }
+
+        //    _context.SaveChanges();
+        //    return RedirectToAction("Index", "Carrito");
+        //}
 
         // Acción para eliminar un producto del carrito
         [HttpPost]
@@ -96,5 +148,15 @@ namespace WebApplication.Controllers
 
             return HttpContext.Session.GetString("SessionId");
         }
+
+        public IActionResult GetCarritoCount()
+        {
+            int count = _context.Carritos
+                .Where(c => c.UsuarioId == GetSessionId())
+                .Sum(c => c.Cantidad);
+
+            return Content(count.ToString());
+        }
+
     }
 }

@@ -1,39 +1,56 @@
 ﻿@model List<WebApplication.Models.Carrito>
 
-<h2>Carrito de Compras</h2>
+<section class="container my-5">
+    <h2 class="text-center text-primary mb-4">Carrito de Compras</h2>
 
-@if (Model.Count == 0)
-{
-    <p>Tu carrito está vacío.</p>
-}
-else
-{
-    <table class="table">
-        <thead>
-            <tr>
-                <th>Producto</th>
-                <th>Cantidad</th>
-                <th>Precio Unitario</th>
-                <th>Subtotal</th>
-                <th>Acciones</th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach (var item in Model)
-            {
-                <tr>
-                    <td>@item.Producto.Nombre</td>
-                    <td>@item.Cantidad</td>
-                    <td>@item.PrecioUnitario.ToString("C")</td>
-                    <td>@(item.Cantidad * item.PrecioUnitario).ToString("C")</td>
-                    <td>
-                        <form asp-action="Eliminar" asp-controller="Carrito" method="post">
-                            <input type="hidden" name="id" value="@item.Id" />
-                            <button type="submit" class="btn btn-danger btn-sm">Eliminar</button>
-                        </form>
-                    </td>
-                </tr>
-            }
-        </tbody>
-    </table>
-}
+    @if (Model.Count == 0)
+    {
+        <div class="alert alert-warning text-center">
+            <p>Tu carrito está vacío. ¡Añade algunos productos!</p>
+        </div>
+    }
+    else
+    {
+        <div class="table-responsive">
+            <table class="table table-bordered table-striped">
+                <thead class="thead-dark">
+                    <tr>
+                        <th>Producto</th>
+                        <th>Cantidad</th>
+                        <th>Precio Unitario</th>
+                        <th>Subtotal</th>
+                        <th>Acciones</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td class="align-middle">
+                                <img src="~/Images/@item.Producto.ImagenUrl" alt="@item.Producto.Nombre" class="img-thumbnail" style="width: 50px; height: auto;">
+                                <strong>@item.Producto.Nombre</strong>
+                            </td>
+                            <td class="align-middle">@item.Cantidad</td>
+                            <td class="align-middle">@item.PrecioUnitario.ToString("C")</td>
+                            <td class="align-middle">@((item.Cantidad * item.PrecioUnitario).ToString("C"))</td>
+                            <td class="align-middle">
+                                <form asp-action="Eliminar" asp-controller="Carrito" method="post">
+                                    <input type="hidden" name="id" value="@item.Id" />
+                                    <button type="submit" class="btn btn-danger btn-sm">
+                                        <i class="bi bi-trash"></i> Eliminar
+                                    </button>
+                                </form>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+
+            <!-- Total y Botón de Checkout -->
+            <div class="d-flex justify-content-between mt-4">
+                <h4>Total: <span class="text-success">@Model.Sum(item => item.Cantidad * item.PrecioUnitario).ToString("C")</span></h4>
+                <a href="@Url.Action("Checkout", "Carrito")" class="btn btn-primary btn-lg">Proceder al Pago</a>
+            </div>
+        </div>
+    }
+</section>
